@@ -10,33 +10,35 @@ class Transaksi extends Model
 {
     use HasFactory;
 
-    protected $table = 'transaksi';
+    protected $table = 'sell_transactions';
 
-    // Fillable properties for mass assignment
     protected $fillable = [
-        'nama_kasir', // Add nama_kasir here
-        // Add other fillable properties if any
+        'nama_kasir',
     ];
 
     public function get_transaksi()
-{
-    return $this->select(
-        'transaksi.*',
-        DB::raw('GROUP_CONCAT(products.title SEPARATOR ", ") as product_titles'), // Concatenate product titles
-        DB::raw('SUM(dt.jumlah) as total_quantity'), // Total quantity of all products in the transaction
-        DB::raw('SUM(dt.jumlah * products.price) as total_harga'), // Total price for the transaction
-        DB::raw('MIN(products.price) as min_price'),
-        'transaksi.created_at as transaksi_created'
-    )
-    ->join('detail_transaksi as dt', 'transaksi.id', '=', 'dt.id_transaksi')
-    ->join('products', 'products.id', '=', 'dt.id_product')
-    ->groupBy('transaksi.id') // Group by transaction ID
-    ->latest('transaksi.created_at');
+    {
+        return $this->select(
+                'sell_transactions.id',
+                'sell_transactions.nama_kasir',
+                'sell_transactions.created_at', // Cukup sekali saja
+                DB::raw('GROUP_CONCAT(products.title SEPARATOR ", ") as product_titles'),
+                DB::raw('SUM(dt.jumlah_pembelian) as total_quantity'),
+                DB::raw('SUM(dt.jumlah_pembelian * products.price) as total_harga')
+            )
+            // Pastikan nama tabel detail & foreign key ini sudah benar sesuai database Anda
+            ->join('sell_transactions_detail as dt', 'sell_transactions.id', '=', 'dt.id_sell_transactions')
+            ->join('products', 'products.id', '=', 'dt.id_products')
+            ->groupBy(
+                'sell_transactions.id',
+                'sell_transactions.nama_kasir',
+                'sell_transactions.created_at'
+            )
+            ->latest('sell_transactions.created_at');
 }
-
 
     public function details()
     {
-        return $this->hasMany('App\Models\DetailTransaksi', 'id_transaksi'); // Make sure to point to the correct DetailTransaksi model
+        return $this->hasMany(DetailTransaksi::class, 'id_sell_transactions');
     }
 }

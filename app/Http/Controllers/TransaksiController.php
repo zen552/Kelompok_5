@@ -50,9 +50,9 @@ class TransaksiController extends Controller
 
     // Fetch individual products for this transaction
     $products = DB::table('detail_transaksi as dt')
-        ->join('products', 'products.id', '=', 'dt.id_product')
-        ->where('dt.id_transaksi', $id)
-        ->select('products.title', 'dt.jumlah as quantity', 'products.price', DB::raw('dt.jumlah * products.price as total_price'))
+        ->join('products', 'products.id', '=', 'dt.id_products')
+        ->where('dt.id_sell_transactions', $id)
+        ->select('products.title', 'dt.jumlah_pembelian as quantity', 'products.price', DB::raw('dt.jumlah_pembelian * products.price as total_price'))
         ->get();
 
     return view('transaksi.show', compact('transaksi', 'products'));
@@ -83,16 +83,16 @@ class TransaksiController extends Controller
     {
     // Validate incoming request data
     $request->validate([
-        'nama_kasir' => 'required|string|max:255',
-        'products' => 'required|array',
-        'products.*.id_product' => 'required|integer|exists:products,id',
-        'products.*.jumlah' => 'required|integer|min:1',
+        'nama_kasir'                    => 'required|string|max:255',
+        'products'                      => 'required|array',
+        'products.*.id_products'        => 'required|integer|exists:products,id',
+        'products.*.jumlah_pembelian'   => 'required|integer|min:1',
     ]);
 
     // Check stock for each product
     foreach ($request->products as $product) {
-        $productModel = Product::find($product['id_product']);
-        if ($productModel->stock < $product['jumlah']) {
+        $productModel = Product::find($product['id_products']);
+        if ($productModel->stock < $product['jumlah_pembelian']) {
             return redirect()->back()->with('error', 'Stock for ' . $productModel->title . ' is insufficient! Only ' . $productModel->stock . ' left.');
         }
     }
@@ -106,16 +106,16 @@ class TransaksiController extends Controller
     foreach ($request->products as $product) {
         // Insert the product details
         DB::table('detail_transaksi')->insert([
-            'id_transaksi' => $transaksi->id,
-            'id_product' => $product['id_product'],
-            'jumlah' => $product['jumlah'],
+            'id_sell_transactions' => $transaksi->id,
+            'id_products' => $product['id_products'],
+            'jumlah_pembelian' => $product['jumlah_pembelian'],
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         // Adjust stock for each product
-        $productModel = Product::find($product['id_product']);
-        $productModel->stock -= $product['jumlah']; // Deduct the stock
+        $productModel = Product::find($product['id_products']);
+        $productModel->stock -= $product['jumlah_pembelian']; // Deduct the stock
         $productModel->save(); // Save the updated stock
     }
 
