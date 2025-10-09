@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('sell_transactions_detail', function (Blueprint $table) {
                         $table->id(); // Primary key
-            $table->unsignedBigInteger('id_transaksi_penjualan'); // FK ke transaksi_penjualan
-            $table->unsignedBigInteger('id_product'); // FK ke products
+            $table->unsignedBigInteger('id_sell_transactions'); // FK ke transaksi_penjualan
+            $table->unsignedBigInteger('id_products'); // FK ke products
             $table->integer('jumlah_pembelian'); // Jumlah barang dibeli
 
             // Tambahkan relasi (opsional tapi direkomendasikan)
-            $table->foreign('id_transaksi_penjualan')
+            $table->foreign('id_sell_transactions')
                   ->references('id')
-                  ->on('transaksi_penjualan')
+                  ->on('sell_transactions')
                   ->onDelete('cascade');
 
-            $table->foreign('id_product')
+            $table->foreign('id_products')
                   ->references('id')
                   ->on('products')
                   ->onDelete('cascade');
