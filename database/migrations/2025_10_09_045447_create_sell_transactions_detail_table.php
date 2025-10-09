@@ -12,7 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sell_transactions_detail', function (Blueprint $table) {
-            $table->id();
+                        $table->id(); // Primary key
+            $table->unsignedBigInteger('id_transaksi_penjualan'); // FK ke transaksi_penjualan
+            $table->unsignedBigInteger('id_product'); // FK ke products
+            $table->integer('jumlah_pembelian'); // Jumlah barang dibeli
+
+            // Tambahkan relasi (opsional tapi direkomendasikan)
+            $table->foreign('id_transaksi_penjualan')
+                  ->references('id')
+                  ->on('transaksi_penjualan')
+                  ->onDelete('cascade');
+
+            $table->foreign('id_product')
+                  ->references('id')
+                  ->on('products')
+                  ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

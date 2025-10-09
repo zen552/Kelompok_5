@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sell_transactions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); 
+            $table->string('nama_kasir', 50);
+            $table->text('email_pembeli');
+            $table->timestamp('tanggal_transaksi')->useCurrent();
+            $table->timestamps(); // created_at & updated_at
         });
     }
 
