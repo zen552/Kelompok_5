@@ -10,4 +10,6 @@ Route::get('/', function () {
 //route resource for products
 Route::resource('/products', \App\Http\Controllers\ProductController::class);
 //route resource for transaksi
-Route::resource('/transaksi', TransaksiController::class);
+Route::resource('transaksi', \App\Http\Controllers\TransaksiController::class);
+Route::get('/transactions', [TransaksiController::class, 'index'])->name('transaksi.index');
+Route::get('/transactions/{id}', [TransaksiController::class, 'show'])->name('transaksi.show');

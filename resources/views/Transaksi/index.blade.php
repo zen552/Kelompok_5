@@ -17,7 +17,6 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link" href="{{route('products.index')}}">Products</a>
-              <a class="nav-link" href="{{route('suppliers.index')}}">Suppliers</a>
               <a class="nav-link active" aria-current="page" href="{{route('transaksi.index')}}">Transaction</a>
             </div>
           </div>
@@ -44,7 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($trans as $t)
+                                @forelse ($transaksis as $t)
                                 <tr>
                                     <td>{{ $t->transaksi_created}}</td>
                                     <td>{{ $t->nama_kasir }}</td>
