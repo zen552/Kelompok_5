@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiPenjualanController;
 
 use App\Http\Controllers\ProductCategoryController;
-
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {

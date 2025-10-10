@@ -15,12 +15,12 @@ use App\Http\Controllers\ProductCategoryController;
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         /* CSS Disederhanakan */
-        body { font-family: 'Quicksand', sans-serif; }
-        @keyframes wobble { 0%, 100% { transform: rotate(0deg); } 15% { transform: rotate(-5deg); } 30% { transform: rotate(3deg); } }
-        .wobble-hover:hover { animation: wobble 0.8s ease-in-out; }
-        .card-hover:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
-        .pawpal-gradient { background: linear-gradient(135deg, #fffcf9 0%, #fef3c7 20%, #fde68a 100%); }
-        .coral-gradient { background: linear-gradient(135deg, #fecaca 0%, #fed7aa 100%); }
+    body { font-family: 'Quicksand', sans-serif; }
+    @keyframes wobble { 0%, 100% { transform: rotate(0deg); } 15% { transform: rotate(-5deg); } 30% { transform: rotate(3deg); } }
+    .wobble-hover:hover { animation: wobble 0.8s ease-in-out; }
+    .card-hover:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+    .pawpal-gradient { background: linear-gradient(135deg, #fffcf9 0%, #fef3c7 20%, #fde68a 100%); }
+    .coral-gradient { background: linear-gradient(135deg, #fecaca 0%, #fed7aa 100%); }
     </style>
 </head>
 <body class="min-h-full pawpal-gradient">
