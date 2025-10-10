@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
 
+
 class TransaksiController extends Controller
 {
     /**
@@ -13,7 +14,7 @@ class TransaksiController extends Controller
     public function index()
     {
         // Ambil semua transaksi + produk terkait (dari query builder di model Transaksi)
-        $transaksis = Transaksi::getSellTransaction()->get();
+        $transaksis = Transaksi::getSellTransaction()->paginate(10);
 
         return view('transaksi.index', compact('transaksis'));
     }

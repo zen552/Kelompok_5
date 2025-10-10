@@ -68,7 +68,7 @@
                             </tbody>
                             
                         </table>
-                        {{$trans->links()}}
+                        {{$transaksis->links()}}
                     </div>
 
                 </div>
