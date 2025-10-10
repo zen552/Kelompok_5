@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransaksiPenjualanController;
 
-use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ProductCategoryController;
+
 use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {
@@ -10,11 +12,6 @@ Route::get('/', function () {
 });
 
 Route::resource('suppliers', SupplierController::class);
-Route::resource('categories', CategoryController::class);
-Route::resource('transactions', TransactionController::class);
-
-
-//route resource for products
+Route::resource('transaksi', TransaksiPenjualanController::class);
 Route::resource('/products', \App\Http\Controllers\ProductController::class);
-//route resource for transaksi
-Route::resource('/transaksi', TransaksiController::class);
+Route::resource('categories', ProductCategoryController::class);

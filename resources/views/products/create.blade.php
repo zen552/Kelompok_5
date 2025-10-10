@@ -13,25 +13,25 @@
                     <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
                 </div>
 
-<div class="form-group">
-    <label for="product_category_id">Kategori</label>
-    <select name="product_category_id" class="form-control">
-        <option value="">-- Pilih Kategori --</option>
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->product_category_name }}</option>
-        @endforeach
-    </select>
-</div>
+                <div class="form-group">
+                    <label for="product_category_id">Kategori</label>
+                    <select name="product_category_id" class="form-control">
+                        <option value="">-- Pilih Kategori --</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->product_category_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-<div class="form-group">
-    <label for="id_supplier">Supplier</label>
-    <select name="id_supplier" class="form-control">
-        <option value="">-- Pilih Supplier --</option>
-        @foreach($suppliers as $supplier)
-            <option value="{{ $supplier->id }}">{{ $supplier->supplier_name }}</option>
-        @endforeach
-    </select>
-</div>
+                <div class="form-group">
+                    <label for="id_supplier">Supplier</label>
+                    <select name="id_supplier" class="form-control">
+                        <option value="">-- Pilih Supplier --</option>
+                        @foreach($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}">{{ $supplier->supplier_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold">TITLE</label>

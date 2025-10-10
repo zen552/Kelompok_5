@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 
 use App\Models\Category_product;
+use App\Models\ProductCategory;
 use App\Models\Supplier;
 //import return type View
 use Illuminate\View\View;
@@ -20,20 +21,6 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * create
-     * 
-     * @return View
-     */
-    public function create(): View
-{
-    $categories = Category_product::all();  // Ambil semua kategori
-    $suppliers  = Supplier::all();          // Ambil semua supplier
-
-    return view('products.create', compact('categories', 'suppliers'));
-}
-
-
     /**
      * index
      * 
@@ -50,6 +37,19 @@ class ProductController extends Controller
     }
 
     /**
+     * create
+     * 
+     * @return View
+     */
+    public function create(): View
+    {
+    $categories = ProductCategory::all();  // Ambil semua kategori
+    $suppliers  = Supplier::all();          // Ambil semua supplier
+
+    return view('products.create', compact('categories', 'suppliers'));
+    }
+    
+    /**
      * store
      * 
      * @param mixed $request
@@ -61,7 +61,7 @@ class ProductController extends Controller
         //validate form
         $validatedData = $request->validate([
             'image'                 => 'required|image|mimes:jpeg,jpg,png|max:10240',
-            'title'                 => 'required|min:5',
+            'title'                 => 'required|min:4',
             'id_supplier'           => 'required|integer',
             'product_category_id'   => 'required|integer',
             'description'           => 'required|min:10',
@@ -109,7 +109,7 @@ class ProductController extends Controller
     public function edit(string $id): View
 {
     $product = Product::findOrFail($id);           // Ambil product
-    $categories = Category_product::all();         // Ambil semua kategori
+    $categories = ProductCategory::all();         // Ambil semua kategori
     $suppliers  = Supplier::all();                 // Ambil semua supplier
 
     return view('products.edit', compact('product', 'categories', 'suppliers'));
@@ -127,7 +127,7 @@ class ProductController extends Controller
         //validate form
         $request->validate([
             'image'                 => 'image|mimes:jpeg,jpg,png|max:10240',
-            'title'                 => 'required|min:5',
+            'title'                 => 'required|min:4',
             'id_supplier'           => 'required|integer',
             'product_category_id'   => 'required|integer',
             'description'           => 'required|min:10',
