@@ -1,15 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransaksiPenjualanController;
+
+use App\Http\Controllers\ProductCategoryController;
+
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\SupplierController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-//route resource for products
+Route::resource('suppliers', SupplierController::class);
+Route::resource('transaksi', TransaksiPenjualanController::class);
 Route::resource('/products', \App\Http\Controllers\ProductController::class);
-//route resource for transaksi
-Route::resource('transaksi', \App\Http\Controllers\TransaksiController::class);
-Route::get('/transactions', [TransaksiController::class, 'index'])->name('transaksi.index');
-Route::get('/transactions/{id}', [TransaksiController::class, 'show'])->name('transaksi.show');
+Route::resource('categories', ProductCategoryController::class);

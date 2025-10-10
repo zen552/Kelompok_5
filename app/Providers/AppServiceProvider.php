@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Support\Facades\Schema; // <--- BARIS INI DITAMBAHKAN
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // <--- BARIS INI DITAMBAHKAN UNTUK MEMPERBAIKI MASALAH PANJANG KUNCI
+        Schema::defaultStringLength(191);
     }
 }
