@@ -57,9 +57,7 @@
             <i class="bi bi-shop pet-icon"></i>
             <h4>PetShop</h4>
         </div>
-        <a href="{{ url('/dashboard') }}" class="{{ request()->is('dashboard') ? 'active' : '' }}">
-            <i class="bi bi-house-door"></i> Dashboard
-        </a>
+        
         <a href="{{ url('/products') }}" class="{{ request()->is('products*') ? 'active' : '' }}">
             <i class="bi bi-box"></i> Products
         </a>
@@ -69,7 +67,7 @@
         <a href="{{ url('/categories') }}" class="{{ request()->is('categories*') ? 'active' : '' }}">
             <i class="bi bi-tags"></i> Kategori Produk
         </a>
-        <a href="{{ url('/transactions') }}" class="{{ request()->is('transactions*') ? 'active' : '' }}">
+        <a href="{{ url('/transaksi') }}" class="{{ request()->is('transaksi*') ? 'active' : '' }}">
             <i class="bi bi-cash-stack"></i> Transaksi
         </a>
     </div>
